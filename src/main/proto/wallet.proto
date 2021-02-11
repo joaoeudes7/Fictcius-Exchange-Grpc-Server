@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package klever.challenge.grpc;
+
+option java_multiple_files = true;
+
+service WalletService {
+  rpc GetWalletStream (GetWalletRequest) returns (stream GetWalletResponse);
+}
+
+message GetWalletRequest {
+}
+
+message GetWalletResponse {
+  repeated WalletCoin coins = 1;
+}
+
+message WalletCoin {
+  string coinCode = 1;
+  int64 equity = 2;
+}

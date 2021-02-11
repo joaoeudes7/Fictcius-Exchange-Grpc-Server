@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package klever.challenge.grpc;
+
+option java_multiple_files = true;
+
+service MarketService {
+  rpc GetPairsMarketStream (GetPairsMarketRequest) returns (stream GetPairsMarketResponse);
+  rpc GetCoinsStream (GetCoinRequest) returns (stream GetCoinResponse);
+  rpc GetOrders (GetOrderRequest) returns (stream GetOrderResponse);
+  rpc RegisterOrder (RegisterOrderRequest) returns (RegisterOrderResponse);
+}
+
+message GetPairsMarketRequest {
+}
+
+message GetPairsMarketResponse {
+  repeated PairCoin pairs = 1;
+}
+
+message GetCoinRequest {
+}
+
+message GetOrderRequest {
+}
+
+message GetOrderResponse {
+  repeated Order orders = 1;
+}
+
+message RegisterOrderResponse {
+}
+
+message GetCoinResponse {
+  repeated Coin coins = 1;
+}
+
+message Order {
+  string id = 1;
+  string pair = 2;
+  TypeOrder type = 3;
+  double price = 4;
+  StatusOrder status = 5;
+  int64 amount = 6;
+}
+
+message PairCoin {
+  string code = 1;
+  double price = 2;
+  double percentDiff = 3;
+  int64 volumeAvailable = 4;
+}
+
+message Coin {
+  string code = 1;
+  double value = 2;
+  int64 available = 3;
+  double oldValue = 4;
+}
+
+message RegisterOrderRequest {
+  int64 amount = 1;
+  string pair = 2;
+  TypeOrder type = 3;
+  double price = 4;
+}
+
+enum TypeOrder {
+  BUY = 0;
+  SELL = 1;
+}
+
+enum ChangeState {
+  UP = 0;
+  DOWN = 1;
+}
+
+enum StatusOrder {
+  PENDING = 0;
+  RESOLVED = 1;
+}
