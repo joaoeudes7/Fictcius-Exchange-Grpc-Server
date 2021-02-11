@@ -1,0 +1,5 @@
+[default]
+protoPath = ["src/main/proto"]
+protoFile = ["org/mvnsearch/grpc/hello.proto"]
+package = "org.mvnsearch.grpc"
+service = "GreeterService"
